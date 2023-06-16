@@ -1,0 +1,36 @@
+.speedBlockActive {
+    width: 24.7%;
+    height: 370px;
+    border: 1px solid rgba(173, 173, 173, 0.466);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    padding: 2px;
+}
+
+.speedBlock {
+    width: 24.7%;
+    height: 350px;
+    padding: 2px;
+
+}
+
+.priceBlock {
+    display: flex;
+    height: 46%;
+}
+
+.price {
+    font-size: 40px;
+    font-weight: 800;
+}
+
+.textDown {
+    align-self: flex-end;
+}
+
+.title {
+    height: 18%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
