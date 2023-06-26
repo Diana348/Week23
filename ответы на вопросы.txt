@@ -1,0 +1,132 @@
+1. Какую ошибку я допустила в [этом] примере? 
+
+
+2. Какие есть способы работы со стилями в React?
+Инлайн стили - указываются в атрибуте style на самом DOM-элементе.
+Внешние таблицы стилей - подключение из внешних СSS файлов.
+СSS-модули - решают проблему изоляции стилей, создавая уникальное имя для каждого класса. Можно использовать одно и то же имя класса, не заботясь о возможных конфликтах.
+СSS-препроцессоры - имеют своё собственное расширение и напрямую в браузере не работают, нуждаются в компиляции, результатом которой является CSS-файл. Это надстройка над CSS, которая добавляет ранее недоступные возможности для CSS с помощью новых синтаксических конструкций.
+
+3. Как будет выглядеть карточка товара, если ей передать атрибут `addedToCart`===0?
+Тогда появится форма изменения/добавления товара в корзину, а количество товара в корзине будет 0.
+
+4. Какие ещё проверки нужно было бы сделать для атрибута `addedToCart`?
+Для атрибута addedToCart нужно сделать проверку 
+if (addedToCart >= 1) 
+{actionItem = <AddToCartForm addedToCart={addedToCart} />;
+} else { 
+actionItem = <AddToCartButton />;}
+
+5. Клиент попросил повесить тег «New» на товары из новой коллекции. Как это сделать, какой условный оператор выбрать?
+export default function Card(props) {
+	const {title, price, description, imgLink, addedToCart, status } = props;
+
+	return (
+        <div className="card">
+            <div className="card-body">
+                {status === "new" && <div>NEW</div>}
+                { imgLink &&
+                    <img src={imgLink} alt={title}/>
+                }
+                <h4 className="card-title">{title}</h4>
+                <p className="card-text">{description}</p>
+            </div>
+            <div className="card-footer">
+                <span className="card-price">${price}</span>
+                {addedToCart
+                    ? <AddToCartForm addedToCart={addedToCart} />
+                    : <AddToCartButton />
+                }
+            </div>
+        </div>
+    );
+}
+
+6. Какими тремя способами можно написать условный рендеринг?
+1)Оператор If:
+export default function Card(props) {
+	const {title, price, description, imgLink, addedToCart } = props;
+	let actionItem;
+	if (addedToCart) {
+		actionItem = <AddToCartForm addedToCart={addedToCart} />;
+	} else {
+		actionItem = <AddToCartButton />;
+	}
+2)Тернарный оператор:
+export default function Card(props) {
+	const {title, price, description, imgLink, addedToCart } = props;
+	return (
+			  <div className="card">
+            <div className="card-body">
+                <img src={imgLink} alt={title}/>
+                <h4 className="card-title">{title}</h4>
+                <p className="card-text">{description}</p>
+            </div>
+            <div className="card-footer">
+                <span className="card-price">${price}</span>
+                {addedToCart
+                    ? <AddToCartForm addedToCart={addedToCart} />
+                    : <AddToCartButton />
+                }
+            </div>
+        </div>
+    );
+}
+3)Логический оператор &&:
+export default function Card(props) {
+	const {title, price, description, imgLink, addedToCart } = props;
+
+	return (
+        <div className="card">
+            <div className="card-body">
+                { imgLink &&
+                    <img src={imgLink} alt={title}/>
+                }
+
+7. Представьте, что вы пишете компонент логина. Если пользователь авторизован, то мы показываем его имя, а если нет, то даём возможность ввода логина и пароля.
+Какой код для этого нужно написать, если за авторизацию пользователя отвечает флаг isAutorized?
+export default function AutorizaitionCart(props) {
+	const {name, lastName, logIn, imgLink, isAutorized } = props;
+let logInItem
+if(isAutorized) {
+<p>`Добрый день, &{name}`</p>;
+} else {
+<div>
+<input type={text} name={login}/>
+<input type={text} name={password}/>
+</div>
+}
+
+8. В чём преимущества использования препроцессоров? Какой ещё есть способ использовать переменные, кроме $ в препроцессорах?
+Преимущества препроцессоров:
+- разделение на небольшие файлы. Можно организовать блочную систему стилей;
+- переменные.Вынести общие (цвета, размеры шрифта, и т.д.) и импортировать их в нужный файл;
+- математические операции;
+- вложения. Позволяет не повторять написание селектора, внутри которого нужно что-то стилизовать.
+Просто пишем вложенные селекторы внутри родительских. Ощутимо ускоряет работу;
+- амперсанд. Позволяет не повторять родительский селектор, быстро менять его. Помогает сделать код читабельней.
+- примеси. Набор правил, который можно использовать многократно.
+
+Можно создать оотдельный CSS-файл:
+/* variables.css */
+@value customBlue: #0c77f8;
+@value customRed: #ff0000;
+@value customGreen: #aaf200;
+
+И импортировать их в существующий файл:
+/* button.css */
+@value colors: "../variables.css";
+@value customBlue, customRed, customGreen from colors;
+
+.button {
+    width: 200px;
+    line-height: 1.5em;
+    text-transform: uppercase;
+    margin: 20px;
+    color: customBlue;
+}
+
+.button__success {
+    background: green;
+    color: customRed;
+}

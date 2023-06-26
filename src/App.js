@@ -14,6 +14,7 @@ function App() {
           isChosen={elem.isChosen}
           key={elem.name}
           titleColor={elem.titleColor}
+          speedBlockColor={elem.speedBlockColor}
         />
       ))}
     </div>

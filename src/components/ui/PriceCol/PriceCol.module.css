@@ -16,15 +16,40 @@
 .priceBlock {
     display: flex;
     height: 46%;
+    color: aliceblue;
+    justify-content: space-evenly;
+    border: 1px solid white;
 }
 
 .price {
-    font-size: 40px;
+    font-size: 50px;
     font-weight: 800;
+    height: 40%;
+    align-self: center;
+}
+
+.textUp {
+    font-size: 20px;
+    padding-top: 45px;
 }
 
 .textDown {
     align-self: flex-end;
+    font-size: 20px;
+    padding-bottom: 48px;
+}
+
+.speed {
+    height: 18%;
+    background-color: rgba(211, 211, 211);
+    padding: 20px 80px 0;
+    border: 1px solid white;
+}
+
+.info {
+    height: 18%;
+    padding: 10px 20px 0;
+    background-color: rgba(169, 169, 169);
 }
 
 .title {
@@ -32,5 +57,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-
+    color: aliceblue;
+    border: 1px solid white;
 }
